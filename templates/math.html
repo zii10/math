@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>簡單計算機</title>
+    <title>計算機</title>
 </head>
 <body>
     <h1>計算機</h1>
 
-    <form method="POST">
-        <input name="a" type="number" step="any" required>
-        <select name="op">
-            <option value="+">+</option>
-            <option value="-">-</option>
-            <option value="*">*</option>
-            <option value="/">/</option>
-        </select>
-        <input name="b" type="number" step="any" required>
-        <button type="submit">計算</button>
-    </form>
+    <input id="a" type="number" step="any">
+    
+    <select id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    
+    <input id="b" type="number" step="any">
+    
+    <button onclick="calc()">計算</button>
 
-    {% if result is not none %}
-        <h2>結果：{{ result }}</h2>
-    {% endif %}
+    <h2 id="result"></h2>
+
+    <script>
+        function calc() {
+            let a = parseFloat(document.getElementById("a").value);
+            let b = parseFloat(document.getElementById("b").value);
+            let op = document.getElementById("op").value;
+
+            let result;
+
+            if (op === "+") result = a + b;
+            if (op === "-") result = a - b;
+            if (op === "*") result = a * b;
+            if (op === "/") result = a / b;
+
+            document.getElementById("result").innerText = "結果：" + result;
+        }
+    </script>
 </body>
 </html>
