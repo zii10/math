@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>計算機</title>
+</head>
+<body>
+    <h1>計算機</h1>
+
+    <input id="a" type="number" step="any">
+    
+    <select id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    
+    <input id="b" type="number" step="any">
+    
+    <button onclick="calc()">計算</button>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calc() {
+            let a = parseFloat(document.getElementById("a").value);
+            let b = parseFloat(document.getElementById("b").value);
+            let op = document.getElementById("op").value;
+
+            let result;
+
+            if (op === "+") result = a + b;
+            if (op === "-") result = a - b;
+            if (op === "*") result = a * b;
+            if (op === "/") result = a / b;
+
+            document.getElementById("result").innerText = "結果：" + result;
+        }
+    </script>
+</body>
+</html>

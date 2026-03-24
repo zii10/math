@@ -1,20 +1,27 @@
-a = float(input("請輸入第一個數字: "))
-op = input("請輸入運算符 (+ - * /): ")
-b = float(input("請輸入第二個數字: "))
+from flask import Flask, request, render_template
 
-if op == "+":
-    result = a + b
-elif op == "-":
-    result = a - b
-elif op == "*":
-    result = a * b
-elif op == "/":
-    if b == 0:
-        print("錯誤：不能除以 0")
-        exit()
-    result = a / b
-else:
-    print("錯誤：不支援的運算符")
-    exit()
+app = Flask(__name__)
 
-print("結果 =", result)
+def calculate(a, b, op):
+    if op == "+":
+        return a + b
+    elif op == "-":
+        return a - b
+    elif op == "*":
+        return a * b
+    elif op == "/":
+        return a / b
+
+@app.route("/", methods=["GET", "POST"])
+def index():
+    result = None
+    if request.method == "POST":
+        a = float(request.form["a"])
+        b = float(request.form["b"])
+        op = request.form["op"]
+        result = calculate(a, b, op)
+
+    return render_template("index.html", result=result)
+
+if __name__ == "__main__":
+    app.run(debug=True)
